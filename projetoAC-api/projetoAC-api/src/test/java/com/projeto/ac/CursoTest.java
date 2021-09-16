@@ -97,7 +97,7 @@ public class CursoTest {
     @Order(5)
     @DisplayName("Teste DELETE Curso Request")
     public void deleteCursoRequestTest(){
-        int codCurso = 5;
+        int codCurso = 2;
 
         given()
                 .contentType("application/json")

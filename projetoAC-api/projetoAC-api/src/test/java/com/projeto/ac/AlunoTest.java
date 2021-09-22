@@ -5,11 +5,14 @@ import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AlunoTest {
 
     private static String uri;
     private static int porta;
     private static String path;
+
+    private static int codAluno;
 
     @BeforeAll
     public static void preCondicao() {
@@ -36,7 +39,7 @@ public class AlunoTest {
     @Order(3)
     @DisplayName("Teste GET Aluno Request")
     public void getAlunoRequestTest(){
-        int codAluno = 2;
+        codAluno = 1;
 
         given()
                 .contentType("application/json")
@@ -54,13 +57,13 @@ public class AlunoTest {
     public void postAlunoRequestTest(){
 
         String alunoJson = "{\n" +
-                "        \"nome\": \"Pedro Junio\",\n" +
-                "        \"email\": \"pedroj@email.com\",\n" +
-                "        \"celular\": \"1234567890\",\n" +
+                "        \"nome\": \"Nathy Helena\",\n" +
+                "        \"email\": \"nh@email.com\",\n" +
+                "        \"celular\": \"5677896578\",\n" +
                 "        \"dataNascimento\": \"2021-03-31T00:00:00.000+00:00\",\n" +
-                "        \"status\": \"T\",\n" +
+                "        \"status\": \"F\",\n" +
                 "        \"curso\": {\n" +
-                "            \"codCurso\": 1,\n" +
+                "            \"codCurso\": 2,\n" +
                 "            \"nome\": \"Teste\",\n" +
                 "            \"cargaHoraria\": 100,\n" +
                 "            \"status\": \"F\"\n" +
@@ -81,7 +84,7 @@ public class AlunoTest {
     @DisplayName("Teste PUT Aluno Request")
     public void putAlunoRequestTest(){
 
-        int codAluno = 3;
+        codAluno = 1;
 
         String alunoJson = "{\n" +
                 "        \"nome\": \"Pedro Ferreira\",\n" +
@@ -90,7 +93,7 @@ public class AlunoTest {
                 "        \"dataNascimento\": \"2021-03-31T00:00:00.000+00:00\",\n" +
                 "        \"status\": \"F\",\n" +
                 "        \"curso\": {\n" +
-                "            \"codCurso\": 3,\n" +
+                "            \"codCurso\": 2,\n" +
                 "            \"nome\": \"Teste\",\n" +
                 "            \"cargaHoraria\": 100,\n" +
                 "            \"status\": \"F\"\n" +
@@ -111,7 +114,7 @@ public class AlunoTest {
     @Order(5)
     @DisplayName("Teste DELETE Aluno Request")
     public void deleteAlunoRequestTest(){
-        int codAluno = 4;
+        codAluno = 1;
 
         given()
                 .contentType("application/json")

@@ -5,12 +5,14 @@ import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CursoTest {
 
     private static String uri;
     private static int porta;
     private static String path;
+
+    private static int codCurso;
 
     @BeforeAll
     public static void preCondicao() {
@@ -37,7 +39,7 @@ public class CursoTest {
     @Order(3)
     @DisplayName("Teste GET Curso Request")
     public void getCursoRequestTest(){
-        int codCurso = 3;
+        codCurso = 1;
 
         given()
                 .contentType("application/json")
@@ -55,9 +57,9 @@ public class CursoTest {
     public void postCursoRequestTest(){
 
         String cursoJson = "{\n" +
-                "        \"nome\": \"Teste\",\n" +
-                "        \"cargaHoraria\": 100,\n" +
-                "        \"status\": \"F\"\n" +
+                "        \"nome\": \"Medicina\",\n" +
+                "        \"cargaHoraria\": 6000,\n" +
+                "        \"status\": \"T\"\n" +
                 "}";
 
         given()
@@ -74,7 +76,7 @@ public class CursoTest {
     @DisplayName("Teste PUT Curso Request")
     public void putCursoRequestTest(){
 
-        int codCurso = 3;
+        codCurso = 1;
 
         String cursoJson = "{\n" +
                 "        \"codCurso\": 3,\n" +
@@ -97,7 +99,7 @@ public class CursoTest {
     @Order(5)
     @DisplayName("Teste DELETE Curso Request")
     public void deleteCursoRequestTest(){
-        int codCurso = 2;
+        codCurso = 1;
 
         given()
                 .contentType("application/json")

@@ -108,4 +108,39 @@ public class CursoTest {
         .then()
                 .statusCode(200);
     }
+
+    @Test
+    @Tag("apiTestRest")
+    @Order(6)
+    @DisplayName("Teste GET Curso Request Não Encontrado")
+    public void getCursoRequestTestNaoEncontrado(){
+        codCurso = 0;
+
+        given()
+                .contentType("application/json")
+                .when()
+                .get(uri + porta + path + "/cursos/" + codCurso)
+                .then()
+                .statusCode(404);
+    }
+
+    @Test
+    @Tag("apiTestRest")
+    @Order(7)
+    @DisplayName("Teste POST Curso Bad Request")
+    public void postCursoBadRequestTest(){
+
+        String cursoJson = "{\n" +
+                "        \"nome\": \"Elétrica\",\n" +
+                "        \"cargaHoraria\": ,\n" +
+                "        \"status\": \"T\"\n" +
+                "}";
+
+        given()
+                .contentType("application/json").body(cursoJson)
+                .when()
+                .post(uri + porta +path + "/cursos")
+                .then()
+                .statusCode(400);
+    }
 }

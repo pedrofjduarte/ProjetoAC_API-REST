@@ -123,4 +123,75 @@ public class AlunoTest {
                 .then()
                 .statusCode(200);
     }
+
+    @Test
+    @Tag("apiTestRest")
+    @Order(6)
+    @DisplayName("Teste GET Aluno Request Não Encontrado")
+    public void getAlunoRequestTestNaoEncontrado(){
+        codAluno = 0;
+
+        given()
+                .contentType("application/json")
+                .when()
+                .get(uri + porta + path + "/alunos/" + codAluno)
+                .then()
+                .statusCode(404);
+    }
+
+    @Test
+    @Tag("apiTestRest")
+    @Order(7)
+    @DisplayName("Teste POST Aluno Bad Request")
+    public void postAlunoBadRequestTest(){
+
+        String alunoJson = "{\n" +
+                "        \"nome\": \"Nathy Helena\",\n" +
+                "        \"email\": \"nh@email.com\",\n" +
+                "        \"celular\": \"5677896578\",\n" +
+                "        \"dataNascimento\": \"2021-03-31T00:00:00.000+00:00\",\n" +
+                "        \"status\": \"F\",\n" +
+                "        \"curso\": {\n" +
+                "            \"codCurso\": ,\n" +
+                "            \"nome\": \"Teste\",\n" +
+                "            \"cargaHoraria\": 100,\n" +
+                "            \"status\": \"F\"\n" +
+                "        }\n" +
+                "}";
+
+        given()
+                .contentType("application/json").body(alunoJson)
+                .when()
+                .post(uri + porta +path + "/alunos")
+                .then()
+                .statusCode(400);
+    }
+
+    @Test
+    @Tag("apiTestRest")
+    @Order(8)
+    @DisplayName("Teste POST Aluno Request Erro 500")
+    public void postAlunoRequestErroTest(){
+
+        String alunoJson = "{\n" +
+                "        \"nome\": \"Nathy Helena\",\n" +
+                "        \"email\": \"nh@email.com\",\n" +
+                "        \"celular\": \"5677896578\",\n" +
+                "        \"dataNascimento\": \"2021-03-31T00:00:00.000+00:00\",\n" +
+                "        \"status\": \"F\",\n" +
+                "        \"curso\": {\n" +
+                "            \"codCurso\": 0,\n" +
+                "            \"nome\": \"Teste\",\n" +
+                "            \"cargaHoraria\": 100,\n" +
+                "            \"status\": \"F\"\n" +
+                "        }\n" +
+                "}";
+
+        given()
+                .contentType("application/json").body(alunoJson)
+                .when()
+                .post(uri + porta +path + "/alunos")
+                .then()
+                .statusCode(500);
+    }
 }
